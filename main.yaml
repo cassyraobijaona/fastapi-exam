@@ -1,7 +1,8 @@
-openapi: "3.1.0"
+openapi: "3.0.3"
 info:
-  title: API Title
-  version: "1.0"
+  title: STD24121
+  description: This is a specification of <STD24121>
+  version: "1.0.0"
 servers:
   - url: http://localhost:8000
 
@@ -12,3 +13,51 @@ paths:
         '200':
           description: pong
 
+  /cars:
+    post:
+      responses:
+        '201':
+          description: Créé une liste d'abjet JSON
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 2
+                  brand:
+                    type: string
+                    example: example
+                  model:
+                    type: string
+                    example: example_model
+
+    get:
+      summary: Récupère la liste d'objet sauvegardee
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            example: 1
+      responses:
+        '200':
+          description: liste trouvé
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: 1
+                  brand:
+                    type: string
+                    example: example
+                  model:
+                    type: string
+                    example: example_model
+        '404':
+          description: liste non trouvé
